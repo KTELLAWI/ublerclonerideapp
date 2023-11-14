@@ -1,0 +1,10 @@
+String nameDriver = '';
+String photoDriver = "";
+String? phoneNumberDriver;
+int requestTimeOutDriver = 30;
+String status = "";
+String carDetailsDriver = "";
+String tripStatusDriverDisplay = "Driver is Arriving";
+String carColor='';
+String carModel='';
+String carNumber='';

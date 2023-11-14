@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "187089727378",
+    "firebase_url": "https://ubberflutter-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "ubberflutter",
+    "storage_bucket": "ubberflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:187089727378:android:f6ec2cebcc7af2dae41b4b",
+        "android_client_info": {
+          "package_name": "com.digistacks.driverapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4FMYsCgW55FY7JQiUkJEQKorrlXN8Ro8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:187089727378:android:6521b0896f5411a3e41b4b",
+        "android_client_info": {
+          "package_name": "com.digistacks.rideapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4FMYsCgW55FY7JQiUkJEQKorrlXN8Ro8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
