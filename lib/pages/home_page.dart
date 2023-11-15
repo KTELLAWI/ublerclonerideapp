@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
     await CommonMethods.convertGeoGraphicCoordinatesIntoHumanReadableAddress(
         currentPositionOfUser!, context);
 
-    await getUserInfoAndCheckedBlockStatus();
+    //await getUserInfoAndCheckedBlockStatus();
     await initializeGeoFireListner();
   }
 
@@ -306,6 +306,7 @@ class _HomePageState extends State<HomePage> {
   makeTripRequest() {
     tripRequestRef =
         FirebaseDatabase.instance.ref().child('tripRequests').push();
+ 
     var pickLocation =
         Provider.of<AppInfo>(context, listen: false).pickUpLocation;
     var dropOffDestinationLocation =
@@ -317,14 +318,17 @@ class _HomePageState extends State<HomePage> {
     };
 
     Map dropOffDestinationCooredinatesMap = {
-      "latitude": dropOffDestinationLocation!.latitudePosition.toString(),
+      "latitude":  "latitude": dropOffDestinationLocation!.latitudePosition.toString(),
       "longitude": dropOffDestinationLocation.longitudePosition.toString(),
+      
+      
     };
     Map driverCoordinates = {
       "latitude": "",
       "longitude": "",
     };
-
+ var pickLocation =
+        Provider.of<AppInfo>(context, listen: false).pickUpLocation;
     Map dataMap = {
       "tripID": tripRequestRef!.key,
       "publishDateTime": DateTime.now().toString(),
@@ -333,8 +337,8 @@ class _HomePageState extends State<HomePage> {
       "userID": userID,
       "pickuplatlng": pickupCooredinatesMap,
       "dropofflatlng": dropOffDestinationCooredinatesMap,
-      "pickupAddress": pickLocation,
-      "dropoffAddress": dropOffDestinationLocation,
+      "pickupAddress": pickLocation.placeName ?? "",
+      "dropoffAddress": dropOffDestinationLocation.placeName ?? "",
       "driverID": "waiting",
       "carDetails": "",
       "driverLocation": driverCoordinates,
@@ -346,7 +350,7 @@ class _HomePageState extends State<HomePage> {
     };
 
     tripRequestRef!.set(dataMap);
-    tripStreamSubscription =
+   tripStreamSubscription =
         tripRequestRef!.onValue.listen((eventSnapshot) async {
       if (eventSnapshot.snapshot.value == null) {
         return;
@@ -512,7 +516,7 @@ class _HomePageState extends State<HomePage> {
             OnlineNearbyDrivers onlineNearbyDrivers = OnlineNearbyDrivers();
             onlineNearbyDrivers.uidDriver = driverEvent['key'];
             onlineNearbyDrivers.latDriver = driverEvent['latitude'];
-            onlineNearbyDrivers.lngDriver = driverEvent['longtitude'];
+            onlineNearbyDrivers.lngDriver = driverEvent['longitude'];
             ManageDriversMethods.nearbyOnlineDriversList
                 .add(onlineNearbyDrivers);
 
@@ -529,7 +533,7 @@ class _HomePageState extends State<HomePage> {
             OnlineNearbyDrivers onlineNearbyDrivers = OnlineNearbyDrivers();
             onlineNearbyDrivers.uidDriver = driverEvent['key'];
             onlineNearbyDrivers.latDriver = driverEvent['latitude'];
-            onlineNearbyDrivers.lngDriver = driverEvent['longtitude'];
+            onlineNearbyDrivers.lngDriver = driverEvent['longitude'];
             ManageDriversMethods.updateOnLineNearbyDriversLocation(
                 onlineNearbyDrivers);
             updateAvailableNearbyOnlineDriversOnMap();
@@ -958,6 +962,11 @@ class _HomePageState extends State<HomePage> {
                                               avilableNearbyOnlineDriversList =
                                                   ManageDriversMethods
                                                       .nearbyOnlineDriversList;
+                                              print("ddddddddddddddddddddddddd" +
+                                                  avilableNearbyOnlineDriversList[
+                                                          0]
+                                                      .lngDriver
+                                                      .toString());
 
                                               ///get nearest available drivers from
                                               ///searchDr
@@ -971,7 +980,7 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                           Text(
                                             (tripDirectionDetails != null)
-                                                ? "\$ ${(cMethods.calculateFareAmount(tripDirectionDetails!)).toString()}"
+                                                ? "\$ ${(cMethods.calculateFareAmount(tripDirectionDetails!)).toStringAsFixed(2)}"
                                                 : "\$ 0 ",
                                             style: TextStyle(
                                               fontSize: 18,
@@ -997,7 +1006,7 @@ class _HomePageState extends State<HomePage> {
                 height: requestContainerHeight,
                 //color: Colors.black54,
                 decoration: BoxDecoration(
-                    color: Colors.black54,
+                    color: Colors.black,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(16),
                         topRight: Radius.circular(16)),
@@ -1101,14 +1110,14 @@ class _HomePageState extends State<HomePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ClipOval(
-                                child: Image.network(
-                                  photoDriver == "" ? "/assets" : photoDriver,
-                                  width: 60,
-                                  height: 60,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                              // ClipOval(
+                              //   child: Image.network(
+                              //     photoDriver == "" ? "/assets" : photoDriver,
+                              //     width: 60,
+                              //     height: 60,
+                              //     fit: BoxFit.cover,
+                              //   ),
+                              // ),
                               SizedBox(
                                 width: 8,
                               ),
