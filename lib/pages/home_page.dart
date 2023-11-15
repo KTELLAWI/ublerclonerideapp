@@ -318,7 +318,7 @@ class _HomePageState extends State<HomePage> {
     };
 
     Map dropOffDestinationCooredinatesMap = {
-      "latitude":  "latitude": dropOffDestinationLocation!.latitudePosition.toString(),
+      "latitude":  dropOffDestinationLocation!.latitudePosition.toString(),
       "longitude": dropOffDestinationLocation.longitudePosition.toString(),
       
       
@@ -337,8 +337,8 @@ class _HomePageState extends State<HomePage> {
       "userID": userID,
       "pickuplatlng": pickupCooredinatesMap,
       "dropofflatlng": dropOffDestinationCooredinatesMap,
-      "pickupAddress": pickLocation.placeName ?? "",
-      "dropoffAddress": dropOffDestinationLocation.placeName ?? "",
+      "pickupAddress": pickLocation!.placeName ,
+      "dropoffAddress": dropOffDestinationLocation!.placeName,
       "driverID": "waiting",
       "carDetails": "",
       "driverLocation": driverCoordinates,
