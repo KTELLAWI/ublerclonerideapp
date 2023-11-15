@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
         context,
         size: Size(0.5, 0.5),
       );
-      BitmapDescriptor.fromAssetImage(configuration, "assets/images/cccc.png")
+      BitmapDescriptor.fromAssetImage(configuration, "assets/images/xx.png")
           .then((icon) {
         carIconNearbyDriver = icon;
       });
@@ -324,8 +324,8 @@ class _HomePageState extends State<HomePage> {
       
     };
     Map driverCoordinates = {
-      "latitude": "",
-      "longitude": "",
+      "latitude": 0.0
+      "longitude": 0.0
     };
 
     Map dataMap = {
@@ -608,6 +608,13 @@ class _HomePageState extends State<HomePage> {
         //when tri is accepting by driver
         currentDriverRef.onValue.listen((data) {
           if (data.snapshot.value.toString() == "accepted") {
+        //        FirebaseDatabase.instance
+        // .ref()
+        // .child("tripRequests")
+        // .child(tripRequestRef!.key)
+        // .child("status")
+        // .set('accepted');
+        //status="accepted";
             timer.cancel();
             currentDriverRef.onDisconnect();
             requestTimeOutDriver = 20;
@@ -1109,14 +1116,14 @@ class _HomePageState extends State<HomePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              // ClipOval(
-                              //   child: Image.network(
-                              //     photoDriver == "" ? "/assets" : photoDriver,
-                              //     width: 60,
-                              //     height: 60,
-                              //     fit: BoxFit.cover,
-                              //   ),
-                              // ),
+                              ClipOval(
+                                child: Image.network(
+                                  photoDriver == "" ? "https://th.bing.com/th/id/R.dfccca7ce13c4252c2bad49936a1e85d?rik=NFtas%2bW4Iq5HdQ&riu=http%3a%2f%2fpngimg.com%2fuploads%2fmercedes%2fmercedes_PNG1889.png&ehk=GRcl%2b7%2bY4gZmo0LACXxN0dLvzFsddlfrPFnmZiEY9hQ%3d&risl=&pid=ImgRaw&r=0" : photoDriver,
+                                  width: 60,
+                                  height: 60,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                               SizedBox(
                                 width: 8,
                               ),

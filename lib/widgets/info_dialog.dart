@@ -17,11 +17,11 @@ class _InfoDialogState extends State<InfoDialog> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.black,
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.black,
             borderRadius: BorderRadius.circular(6),),
             child: Padding(
               padding: EdgeInsets.all(16),
@@ -36,17 +36,22 @@ class _InfoDialogState extends State<InfoDialog> {
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
+                      color:Colors.white,
                     ),
                   ),
                   SizedBox(height: 27),
                   Text(
                     "NO driver found in The nearby location , please try again shortly",
+                    style:TextStyle(color:Colors.white70,)
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 32),
                   SizedBox(
                     width: 202,
                     child: ElevatedButton(
+                      style:ElevatedButton.styleFrom(
+                        backgroundColor:Colors.amber
+                      ),
                       child: Text('OK'),
                       onPressed: () {
                         Navigator.pop(context);
