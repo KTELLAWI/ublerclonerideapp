@@ -324,8 +324,8 @@ class _HomePageState extends State<HomePage> {
       
     };
     Map driverCoordinates = {
-      "latitude": 0.0
-      "longitude": 0.0
+      "latitude": 0.0,
+      "longitude": 0.0,
     };
 
     Map dataMap = {

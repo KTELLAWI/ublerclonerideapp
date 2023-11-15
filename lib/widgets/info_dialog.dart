@@ -42,7 +42,7 @@ class _InfoDialogState extends State<InfoDialog> {
                   SizedBox(height: 27),
                   Text(
                     "NO driver found in The nearby location , please try again shortly",
-                    style:TextStyle(color:Colors.white70,)
+                    style:TextStyle(color:Colors.white70,),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 32),
