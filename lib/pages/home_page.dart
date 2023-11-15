@@ -327,8 +327,7 @@ class _HomePageState extends State<HomePage> {
       "latitude": "",
       "longitude": "",
     };
- var pickLocation =
-        Provider.of<AppInfo>(context, listen: false).pickUpLocation;
+
     Map dataMap = {
       "tripID": tripRequestRef!.key,
       "publishDateTime": DateTime.now().toString(),
