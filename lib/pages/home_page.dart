@@ -558,16 +558,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   searchDriver() {
-    if (avilableNearbyOnlineDriversList.isEmpty) {
-      cancelRideRequest();
-      resetAppNow();
-      noDriverAvailable();
-      return;
-    }
+    // if (avilableNearbyOnlineDriversList.isEmpty) {
+    //   cancelRideRequest();
+    //   resetAppNow();
+    //   noDriverAvailable();
+    //   return;
+    // }
     var currentDriver = avilableNearbyOnlineDriversList[0];
     sendNotificationToDriver(currentDriver);
 
-    avilableNearbyOnlineDriversList.removeAt(0);
+    //avilableNearbyOnlineDriversList.removeAt(0);
   }
 
   sendNotificationToDriver(OnlineNearbyDrivers currentDriver) {
@@ -586,25 +586,27 @@ class _HomePageState extends State<HomePage> {
         .child(currentDriver.uidDriver.toString())
         .child("deviceToken");
 
-    currentDriverToken.once().then((dataSnapshot) {
-      if (dataSnapshot.snapshot.value != null) {
-        String devicetoken = dataSnapshot.snapshot.value.toString();
-        PushNotificationService.sendNotificationToSelectedDriver(
-            devicetoken, context, tripRequestRef!.key.toString());
-      } else {
-        return;
-      }
+    // currentDriverToken.once().then((dataSnapshot) {
+    //   if (dataSnapshot.snapshot.value != null) {
+    //     String devicetoken = dataSnapshot.snapshot.value.toString();
+    //     PushNotificationService.sendNotificationToSelectedDriver(
+    //         "vK32HuA3O5zcYOLEXHHFXELxtG6w7YA1Mvi8yy2ETFrJqQlFwBwa0e8z9D", context, tripRequestRef!.key.toString());
+    //   } else {
+    //     return;
+    //   }
+       PushNotificationService.sendNotificationToSelectedDriver(
+            "vK32HuA3O5zcYOLEXHHFXELxtG6w7YA1Mvi8yy2ETFrJqQlFwBwa0e8z9D", context, tripRequestRef!.key.toString());
 
       const oneTickPerSec = Duration(seconds: 1);
       var timerCountDown = Timer.periodic(oneTickPerSec, (timer) {
         requestTimeOutDriver = requestTimeOutDriver - 1;
 
-        if (stateOfApp != "requesting") {
-          timer.cancel();
-          currentDriverRef.set("cancelled");
-          currentDriverRef.onDisconnect();
-          requestTimeOutDriver = 20;
-        }
+        // if (stateOfApp != "requesting") {
+        //   timer.cancel();
+        //   currentDriverRef.set("cancelled");
+        //   currentDriverRef.onDisconnect();
+        //   requestTimeOutDriver = 20;
+        // }
         //when tri is accepting by driver
         currentDriverRef.onValue.listen((data) {
           if (data.snapshot.value.toString() == "accepted") {
@@ -628,8 +630,10 @@ class _HomePageState extends State<HomePage> {
 
           searchDriver();
         }
-      });
-    });
+      }
+      );
+    //}
+    //);
   }
 
   @override
