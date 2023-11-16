@@ -558,16 +558,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   searchDriver() {
-    // if (avilableNearbyOnlineDriversList.isEmpty) {
-    //   cancelRideRequest();
-    //   resetAppNow();
-    //   noDriverAvailable();
-    //   return;
-    // }
+    if (avilableNearbyOnlineDriversList.isEmpty) {
+      cancelRideRequest();
+      resetAppNow();
+      noDriverAvailable();
+      return;
+    }
     var currentDriver = avilableNearbyOnlineDriversList[0];
     sendNotificationToDriver(currentDriver);
 
-    //avilableNearbyOnlineDriversList.removeAt(0);
+    avilableNearbyOnlineDriversList.removeAt(0);
   }
 
   sendNotificationToDriver(OnlineNearbyDrivers currentDriver) {
@@ -590,7 +590,7 @@ class _HomePageState extends State<HomePage> {
       if (dataSnapshot.snapshot.value != null) {
         String devicetoken = dataSnapshot.snapshot.value.toString();
         PushNotificationService.sendNotificationToSelectedDriver(
-            currentDriverToken, context, tripRequestRef!.key.toString());
+            currentDriverToken, context, tripRequestRef!.key!.toString());
       } else {
         return;
       }
