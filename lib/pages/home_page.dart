@@ -586,37 +586,31 @@ class _HomePageState extends State<HomePage> {
         .child(currentDriver.uidDriver.toString())
         .child("deviceToken");
 
-    // currentDriverToken.once().then((dataSnapshot) {
-    //   if (dataSnapshot.snapshot.value != null) {
-    //     String devicetoken = dataSnapshot.snapshot.value.toString();
-    //     PushNotificationService.sendNotificationToSelectedDriver(
-    //         "vK32HuA3O5zcYOLEXHHFXELxtG6w7YA1Mvi8yy2ETFrJqQlFwBwa0e8z9D", context, tripRequestRef!.key.toString());
-    //   } else {
-    //     return;
-    //   }
-       PushNotificationService.sendNotificationToSelectedDriver(
-            "d-hfI3K1Q0m85ODbuJkfAo:APA91bEkPX7rUQTeDaTKpIo_UIuM490SAYztBu0UN41VLcOqolgNYQI3wJNAj8S_8sJ9mnm_5pazh1OfH-vK32HuA3O5zcYOLEXHHFXELxtG6w7YA1Mvi8yy2ETFrJqQlFwBwa0e8z9D", context, tripRequestRef!.key.toString());
+    currentDriverToken.once().then((dataSnapshot) {
+      if (dataSnapshot.snapshot.value != null) {
+        String devicetoken = dataSnapshot.snapshot.value.toString();
+        PushNotificationService.sendNotificationToSelectedDriver(
+            currentDriverToken, context, tripRequestRef!.key.toString());
+      } else {
+        return;
+      }
+    
+       
 
       const oneTickPerSec = Duration(seconds: 1);
       var timerCountDown = Timer.periodic(oneTickPerSec, (timer) {
         requestTimeOutDriver = requestTimeOutDriver - 1;
 
-        // if (stateOfApp != "requesting") {
-        //   timer.cancel();
-        //   currentDriverRef.set("cancelled");
-        //   currentDriverRef.onDisconnect();
-        //   requestTimeOutDriver = 20;
-        // }
+        if (stateOfApp != "requesting") {
+          timer.cancel();
+          currentDriverRef.set("cancelled");
+          currentDriverRef.onDisconnect();
+          requestTimeOutDriver = 20;
+        }
         //when tri is accepting by driver
         currentDriverRef.onValue.listen((data) {
           if (data.snapshot.value.toString() == "accepted") {
-        //        FirebaseDatabase.instance
-        // .ref()
-        // .child("tripRequests")
-        // .child(tripRequestRef!.key)
-        // .child("status")
-        // .set('accepted');
-        //status="accepted";
+       
             timer.cancel();
             currentDriverRef.onDisconnect();
             requestTimeOutDriver = 20;
@@ -632,8 +626,8 @@ class _HomePageState extends State<HomePage> {
         }
       }
       );
-    //}
-    //);
+    }
+    );
   }
 
   @override
@@ -1020,14 +1014,15 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(16),
                         topRight: Radius.circular(16)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.amber,
-                        blurRadius: 5,
-                        spreadRadius: .3,
-                        offset: Offset(.3, .3),
-                      )
-                    ]),
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //     color: Colors.amber,
+                    //     blurRadius: 5,
+                    //     spreadRadius: .3,
+                    //     offset: Offset(.3, .3),
+                    //   )
+                    // ]
+                    ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
                   child: Column(
@@ -1082,16 +1077,17 @@ class _HomePageState extends State<HomePage> {
                 decoration: BoxDecoration(
                     color: Colors.black54,
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(16),
-                        topRight: Radius.circular(16)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.amber,
-                        blurRadius: 5,
-                        spreadRadius: .3,
-                        offset: Offset(.3, .3),
-                      )
-                    ]),
+                        topLeft: Radius.circular(25),
+                        topRight: Radius.circular(25)),
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //     color: Colors.amber,
+                    //     blurRadius: 5,
+                    //     spreadRadius: .3,
+                    //     offset: Offset(.3, .3),
+                    //   )
+                    // ]
+                    ),
                 child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
                     child: Column(
@@ -1122,7 +1118,7 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               ClipOval(
                                 child: Image.network(
-                                  photoDriver == "" ? "https://th.bing.com/th/id/R.dfccca7ce13c4252c2bad49936a1e85d?rik=NFtas%2bW4Iq5HdQ&riu=http%3a%2f%2fpngimg.com%2fuploads%2fmercedes%2fmercedes_PNG1889.png&ehk=GRcl%2b7%2bY4gZmo0LACXxN0dLvzFsddlfrPFnmZiEY9hQ%3d&risl=&pid=ImgRaw&r=0" : photoDriver,
+                                  photoDriver == "" ? "https://th.bing.com/th/id/R.0d9051f2fdf8418c2edae540d3f9229a?rik=h7s9Iu6Zf%2b7YJg&pid=ImgRaw&r=0" : photoDriver,
                                   width: 60,
                                   height: 60,
                                   fit: BoxFit.cover,
