@@ -591,7 +591,7 @@ class _HomePageState extends State<HomePage> {
         String devicetoken = dataSnapshot.snapshot.value.toString();
         String tripid = tripRequestRef!.key.toString();
         PushNotificationService.sendNotificationToSelectedDriver(
-            currentDriverToken, context, tripid);
+            devicetoken, context, tripid);
       } else {
         return;
       }
