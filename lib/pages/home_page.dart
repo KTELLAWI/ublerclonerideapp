@@ -590,7 +590,7 @@ class _HomePageState extends State<HomePage> {
       if (dataSnapshot.snapshot.value != null) {
         String devicetoken = dataSnapshot.snapshot.value.toString();
         PushNotificationService.sendNotificationToSelectedDriver(
-            currentDriverToken, context, tripRequestRef!.key!.toString());
+            currentDriverToken, context, tripRequestRef!.key.toString());
       } else {
         return;
       }

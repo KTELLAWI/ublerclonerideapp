@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 
 class PushNotificationService {
   static sendNotificationToSelectedDriver(
-      String deviceToken, BuildContext context, String tripID) async {
+      String deviceToken, BuildContext context, String? tripID) async {
     String droppOffLocation = Provider.of<AppInfo>(context, listen: false)
         .dropOffLocation!
         .placeName
@@ -34,7 +34,7 @@ class PushNotificationService {
       "click_action": "FLUTTER_NOTIFICATION_CLICK",
       "id": "1",
       "status": "done",
-      "tripID": tripID,
+      "tripID": tripID ?? "sssss",
     };
     Map bodyNotificationMap = {
       "notification": titleBodyNotification,
